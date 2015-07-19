@@ -5,6 +5,7 @@ import urllib.request
 import json
 import math
 import sys
+import os
 from pymongo import MongoClient
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
@@ -85,7 +86,7 @@ prevByte = 0
 bandwidth = []
 tmp = []
 #collect data from DB
-for post in db.DataTime.find({ "test" : day },{'_id':0}).sort("_time"):
+for post in db.DataTime.find({ "test" : day },{'_id':0}).limit(3).sort("_time"):
 	time = post['_time']
 	byte = 0;
 
@@ -120,7 +121,12 @@ for i in range(skip, len(tmp) - skipend):
 
 print("Data collected! Creating the file...")
 
-f = open("out/forecast_{1}/{0}.arff" . format(filename, forecast), 'w')
+switch_path = switch.replace(":", "-")
+directory = "out/forecast_{0}/{1}" . format(forecast, switch_path)
+if not os.path.exists(directory):
+    os.makedirs(directory)
+
+f = open("out/forecast_{1}/{2}/{0}.arff" . format(filename, forecast, switch_path), 'w')
 
 # Header definition
 out = "@relation {0}\n" . format(filename)
