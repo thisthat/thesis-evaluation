@@ -1,6 +1,4 @@
 import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +8,7 @@ import java.util.List;
 public class Forecast {
     private int _id;
     private List<Switch> switches = new ArrayList<>();
+    private List<Switch> switchesEval = new ArrayList<>();
     private String path = "forecast_";
 
     public int getID() {
@@ -41,17 +40,15 @@ public class Forecast {
         generateSwitch();
     }
 
-    public void generateSwitch(){
-        Path currentRelativePath = Paths.get("");
-        String path = currentRelativePath.toAbsolutePath().toString() + TestPath.initFolder + this.getPath();
+    public void generateSwitch() {
+        String path = GenerateModel.initFolder + this.getPath() + "\\";
         File folder = new File(path);
         for (final File fileEntry : folder.listFiles()) {
             if (fileEntry.isDirectory()) {
-                String switchName = fileEntry.toString().substring( fileEntry.toString().lastIndexOf("\\") + 1 );
+                String switchName = fileEntry.toString().substring(fileEntry.toString().lastIndexOf("\\") + 1);
                 Switch sw = new Switch(switchName, fileEntry.toString());
                 switches.add(sw);
             }
         }
-
     }
 }
