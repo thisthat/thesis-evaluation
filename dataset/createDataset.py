@@ -62,7 +62,7 @@ print("Connection to DB Enstablished")
 
 
 def classification(bandwidth):
-	n = 0
+	n = 1
 	while (n*size_class < bandwidth) :
 		n += 1
 	ret = n*size_class
@@ -86,7 +86,7 @@ prevByte = 0
 bandwidth = []
 tmp = []
 #collect data from DB
-for post in db.DataTime.find({ "test" : day },{'_id':0}).limit(3).sort("_time"):
+for post in db.DataTime.find({ "test" : day },{'_id':0}).sort("_time"):
 	time = post['_time']
 	byte = 0;
 
@@ -150,7 +150,7 @@ for i in range(win_size-1):
 
 out = "@attribute prediction_class {"
 last = math.ceil(max_bandwidthClass / size_class) + 1
-for i in range(last):
+for i in range(1,last):
 	if i == last - 1:
 		out += "'byte_{0}'" . format(i*size_class)
 	else :
