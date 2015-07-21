@@ -1,7 +1,7 @@
 <?php
 
 
-$dir_n = "./learn/" . str_replace(":", "-", $argv[1]) . "/";
+$dir_n = "./learn_500d/" . str_replace(":", "-", $argv[1]) . "/";
 $exts = ['arff'];
 
 
