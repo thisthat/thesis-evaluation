@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Class-Path: weka.jar poi-3.11-20141221.jar
+Main-Class: weka.api.TestPath
+

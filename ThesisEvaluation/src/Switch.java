@@ -1,7 +1,9 @@
 import java.io.File;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
 
 /**
@@ -12,6 +14,15 @@ public class Switch {
     private List<String> datasets = new ArrayList<>();
     private List<String> models = new ArrayList<>();
     private String folder;
+    private Map<String, Result> map = new HashMap<String, Result>();
+
+    public Map<String, Result> getMap() {
+        return map;
+    }
+
+    public void setMap(Map<String, Result> map) {
+        this.map = map;
+    }
 
     public String getDpid() {
         return dpid;

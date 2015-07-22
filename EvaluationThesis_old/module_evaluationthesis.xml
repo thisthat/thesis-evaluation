@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_evaluationthesis" default="compile.module.evaluationthesis">
+  <dirname property="module.evaluationthesis.basedir" file="${ant.file.module_evaluationthesis}"/>
+  
+  <property name="module.jdk.home.evaluationthesis" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.evaluationthesis" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.evaluationthesis" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.evaluationthesis" value="-encoding windows-1252 -source 8 ${compiler.args}"/>
+  
+  <property name="evaluationthesis.output.dir" value="${module.evaluationthesis.basedir}/../out/production/EvaluationThesis"/>
+  <property name="evaluationthesis.testoutput.dir" value="${module.evaluationthesis.basedir}/../out/test/EvaluationThesis"/>
+  
+  <path id="evaluationthesis.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="evaluationthesis.module.production.classpath">
+    <path refid="${module.jdk.classpath.evaluationthesis}"/>
+    <path refid="library.poi-3.11-20141221.classpath"/>
+    <path refid="library.weka.classpath"/>
+  </path>
+  
+  <path id="evaluationthesis.runtime.production.module.classpath">
+    <pathelement location="${evaluationthesis.output.dir}"/>
+    <path refid="library.poi-3.11-20141221.classpath"/>
+    <path refid="library.weka.classpath"/>
+  </path>
+  
+  <path id="evaluationthesis.module.classpath">
+    <path refid="${module.jdk.classpath.evaluationthesis}"/>
+    <pathelement location="${evaluationthesis.output.dir}"/>
+    <path refid="library.poi-3.11-20141221.classpath"/>
+    <path refid="library.weka.classpath"/>
+  </path>
+  
+  <path id="evaluationthesis.runtime.module.classpath">
+    <pathelement location="${evaluationthesis.testoutput.dir}"/>
+    <pathelement location="${evaluationthesis.output.dir}"/>
+    <path refid="library.poi-3.11-20141221.classpath"/>
+    <path refid="library.weka.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.evaluationthesis">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.evaluationthesis">
+    <patternset refid="excluded.from.module.evaluationthesis"/>
+  </patternset>
+  
+  <path id="evaluationthesis.module.sourcepath">
+    <dirset dir="${module.evaluationthesis.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.evaluationthesis" depends="compile.module.evaluationthesis.production,compile.module.evaluationthesis.tests" description="Compile module EvaluationThesis"/>
+  
+  <target name="compile.module.evaluationthesis.production" depends="register.custom.compilers" description="Compile module EvaluationThesis; production classes">
+    <mkdir dir="${evaluationthesis.output.dir}"/>
+    <javac2 destdir="${evaluationthesis.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.evaluationthesis}/javac">
+      <compilerarg line="${compiler.args.evaluationthesis}"/>
+      <bootclasspath refid="evaluationthesis.module.bootclasspath"/>
+      <classpath refid="evaluationthesis.module.production.classpath"/>
+      <src refid="evaluationthesis.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.evaluationthesis"/>
+    </javac2>
+    
+    <copy todir="${evaluationthesis.output.dir}">
+      <fileset dir="${module.evaluationthesis.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.evaluationthesis.tests" depends="register.custom.compilers,compile.module.evaluationthesis.production" description="compile module EvaluationThesis; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.evaluationthesis" description="cleanup module">
+    <delete dir="${evaluationthesis.output.dir}"/>
+    <delete dir="${evaluationthesis.testoutput.dir}"/>
+  </target>
+</project>

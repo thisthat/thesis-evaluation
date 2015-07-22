@@ -1,6 +1,5 @@
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Giovanni Liva on 20/07/2015.
@@ -50,5 +49,9 @@ public class Forecast {
                 switches.add(sw);
             }
         }
+    }
+
+    public void writeFile(){
+        
     }
 }
