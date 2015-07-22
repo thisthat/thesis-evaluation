@@ -12,6 +12,7 @@ import java.util.function.Predicate;
 public class Switch {
     private String dpid;
     private List<String> datasets = new ArrayList<>();
+    private List<String> datasetsEval = new ArrayList<>();
     private List<String> models = new ArrayList<>();
     private String folder;
     private Map<String, Result> map = new HashMap<String, Result>();

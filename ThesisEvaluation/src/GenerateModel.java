@@ -41,7 +41,7 @@ public class GenerateModel {
 
     public static void main(String[] args) {
         if(args.length < 1) {
-            System.out.println("Usage: java -jar ThesisEvaluation path_learn -[nb|smo|zero|bn|nn|j48|kstar] [-g] [-e path_eval]");
+            System.out.println("Usage: java -jar ThesisEvaluation path_learn -[nb|smo|zero|bn|nn|j48|kstar] [-g] [-e]");
             System.out.println("\t-nb:       use NaiveBayes");
             System.out.println("\t-smo:      use SMO");
             System.out.println("\t-zero:     use ZeroR");
@@ -49,7 +49,7 @@ public class GenerateModel {
             System.out.println("\t-nn:       use Neural Network with MultiLayerPerceptron");
             System.out.println("\t-j48:      use J48 Tree");
             System.out.println("\t-kstar:    use K*");
-            System.out.println("");
+            System.out.println("Use only one of the following");
             System.out.println("\t-g: Generate the files w/ the model");
             System.out.println("\t-e: Evaluate");
             System.exit(0);
@@ -95,10 +95,16 @@ public class GenerateModel {
             evalFolder = evalFolder + "\\";
         }
 
+
+        //Collect Info
+        for(int i = 1; i <= howManyForecast; ++i) {
+            forecasts[i - 1] = new Forecast(i);
+        }
+
         if(generate) {
             run();
         }
-        if(evaluate){
+        else {
             testModel();
         }
 
@@ -127,11 +133,6 @@ public class GenerateModel {
         }
         if(kstar) {
             classifiers.add(new KStar());
-        }
-
-        //Collect Info
-        for(int i = 1; i <= howManyForecast; ++i) {
-            forecasts[i - 1] = new Forecast(i);
         }
 
         //Create Model
@@ -164,10 +165,7 @@ public class GenerateModel {
     }
 
     public static void testModel(){
-        //Collect
-        for(int i = 1; i <= howManyForecast; ++i) {
-            forecasts[i - 1] = new Forecast(i);
-        }
+
         //Get Evaluation Results
         for(int i = 0; i < howManyForecast; ++i) {
             List<Switch> ls = forecasts[i].getSwitches();
