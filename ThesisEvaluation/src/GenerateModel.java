@@ -163,7 +163,7 @@ public class GenerateModel {
         System.out.println("Model [" + nameModel + "\\" + name + ".model] Generated!");
     }
 
-    public static void testModel() {
+    public static void testModel(){
         //Collect
         for(int i = 1; i <= howManyForecast; ++i) {
             forecasts[i - 1] = new Forecast(i);
@@ -173,22 +173,25 @@ public class GenerateModel {
             List<Switch> ls = forecasts[i].getSwitches();
             for(Switch sw : ls) {
                 String evalARFF = sw.getMergeARFF();
-                File f = new File(evalARFF);
-                for(Classifier c: classifiers) {
-                    Result r;
-                    String cName = c.getClass().toString();
-                    cName = cName.substring(cName.lastIndexOf('.') + 1);
+                List<String> swClassifiers = sw.getModels();
+                for(String classifier: swClassifiers) {
                     try {
+                        Result r;
+                        Classifier c = (Classifier) SerializationHelper.read(classifier);
+                        String cName = c.getClass().toString();
+                        cName = cName.substring(cName.lastIndexOf('.') + 1);
                         r = evaluateModel(c, evalARFF);
                         sw.getMap().put(cName, r);
+                        System.out.println("Classifier [" + cName + "] for Switch [" + sw.getDpid() + "] Evaluated!");
                     } catch (Exception e){
                         System.err.println(e.toString());
                     }
                 }
             }
         }
-
-        boolean var5 = false;
+        for(int i = 1; i <= howManyForecast; ++i) {
+            forecasts[i].writeFile();
+        }
     }
 
     public static Result evaluateModel(Classifier c, String fileModel) throws Exception {
