@@ -189,7 +189,7 @@ public class GenerateModel {
                 }
             }
         }
-        for(int i = 1; i <= howManyForecast; ++i) {
+        for(int i = 0; i < howManyForecast; ++i) {
             forecasts[i].writeFile();
         }
     }
