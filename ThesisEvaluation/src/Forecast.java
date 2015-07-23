@@ -116,7 +116,7 @@ public class Forecast {
             }
             int _maxRow = _nRow;
             swCouter++;
-            _nRow += swCouter * space;
+            _nRow += space;
             //HIGHLIGHT MAX/MIN VAL
             //System.out.println("Start looking through cells " + maxRow + "::" + maxCol);
             double _maxVal = 0;

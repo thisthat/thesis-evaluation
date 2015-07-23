@@ -2,6 +2,8 @@ import java.io.File;
 import java.util.List;
 import java.util.Random;
 import java.util.Vector;
+
+import sun.awt.windows.ThemeReader;
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
 import weka.classifiers.bayes.BayesNet;
@@ -22,7 +24,6 @@ import weka.core.converters.ConverterUtils.DataSource;
 
 public class GenerateModel {
     static String initFolder = "";
-    static String evalFolder = "";
     static final int howManyForecast = 5;
     static Forecast[] forecasts = new Forecast[5];
     static Vector<Classifier> classifiers = new Vector();
@@ -83,7 +84,6 @@ public class GenerateModel {
                     break;
                 case  "-e":
                     evaluate = true;
-                    evalFolder = args[i+1];
             }
         }
 
@@ -91,10 +91,6 @@ public class GenerateModel {
         if(!initFolder.endsWith("\\")) {
             initFolder = initFolder + "\\";
         }
-        if(!evalFolder.endsWith("\\")) {
-            evalFolder = evalFolder + "\\";
-        }
-
 
         //Collect Info
         for(int i = 1; i <= howManyForecast; ++i) {
@@ -166,28 +162,42 @@ public class GenerateModel {
 
     public static void testModel(){
 
+        Thread[] th = new Thread[howManyForecast];
         //Get Evaluation Results
         for(int i = 0; i < howManyForecast; ++i) {
-            List<Switch> ls = forecasts[i].getSwitches();
-            for(Switch sw : ls) {
-                String evalARFF = sw.getMergeARFF();
-                List<String> swClassifiers = sw.getModels();
-                for(String classifier: swClassifiers) {
-                    try {
-                        Result r;
-                        Classifier c = (Classifier) SerializationHelper.read(classifier);
-                        String cName = c.getClass().toString();
-                        cName = cName.substring(cName.lastIndexOf('.') + 1);
-                        r = evaluateModel(c, evalARFF);
-                        sw.getMap().put(cName, r);
-                        System.out.println("Classifier [" + cName + "] for Switch [" + sw.getDpid() + "] Evaluated!");
-                    } catch (Exception e){
-                        System.err.println(e.toString());
+
+            final int finalI = i;
+            th[i] = new Thread(new Runnable() {
+                public void run() {
+                    // code goes here.
+                    List<Switch> ls = forecasts[finalI].getSwitches();
+                    for(Switch sw : ls) {
+                        String evalARFF = sw.getMergeARFF();
+                        List<String> swClassifiers = sw.getModels();
+                        for(String classifier: swClassifiers) {
+                            try {
+                                Result r;
+                                Classifier c = (Classifier) SerializationHelper.read(classifier);
+                                String cName = c.getClass().toString();
+                                cName = cName.substring(cName.lastIndexOf('.') + 1);
+                                r = evaluateModel(c, evalARFF);
+                                sw.getMap().put(cName, r);
+                                System.out.println("[Forecast " + finalI + "] Classifier [" + cName + "] for Switch [" + sw.getDpid() + "] Evaluated!");
+                            } catch (Exception e){
+                                System.err.println(e.toString());
+                            }
+                        }
                     }
                 }
-            }
+            });
+            th[i].start();
         }
         for(int i = 0; i < howManyForecast; ++i) {
+            try {
+                th[i].join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             forecasts[i].writeFile();
         }
     }
