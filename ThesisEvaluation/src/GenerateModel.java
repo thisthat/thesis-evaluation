@@ -24,6 +24,7 @@ import weka.core.converters.ConverterUtils.DataSource;
 
 public class GenerateModel {
     static String initFolder = "";
+    static int classCorrectness = 0;
     static final int howManyForecast = 5;
     static Forecast[] forecasts = new Forecast[5];
     static Vector<Classifier> classifiers = new Vector();
@@ -36,13 +37,14 @@ public class GenerateModel {
     static boolean kstar = false;
     static boolean generate = false;
     static boolean evaluate = false;
+    static boolean evaluate2 = false;
 
     public GenerateModel() {
     }
 
     public static void main(String[] args) {
         if(args.length < 1) {
-            System.out.println("Usage: java -jar ThesisEvaluation path_learn -[nb|smo|zero|bn|nn|j48|kstar] [-g] [-e]");
+            System.out.println("Usage: java -jar ThesisEvaluation path_learn -[nb|smo|zero|bn|nn|j48|kstar] [-g] [-e] [-e2 n] ");
             System.out.println("\t-nb:       use NaiveBayes");
             System.out.println("\t-smo:      use SMO");
             System.out.println("\t-zero:     use ZeroR");
@@ -52,7 +54,8 @@ public class GenerateModel {
             System.out.println("\t-kstar:    use K*");
             System.out.println("Use only one of the following");
             System.out.println("\t-g: Generate the files w/ the model");
-            System.out.println("\t-e: Evaluate");
+            System.out.println("\t-e: Evaluate in default manner");
+            System.out.println("\t-e2: Evaluate with correctness of +- n classes [default 0]");
             System.exit(0);
         }
 
@@ -84,6 +87,11 @@ public class GenerateModel {
                     break;
                 case  "-e":
                     evaluate = true;
+                case  "-e2":
+                    evaluate = evaluate2 = true;
+                    if(i < args.length -1){
+                        classCorrectness = Integer.parseInt(args[i+1]);
+                    }
             }
         }
 
@@ -180,7 +188,7 @@ public class GenerateModel {
                                 Classifier c = (Classifier) SerializationHelper.read(classifier);
                                 String cName = c.getClass().toString();
                                 cName = cName.substring(cName.lastIndexOf('.') + 1);
-                                r = evaluateModel(c, evalARFF);
+                                r = evaluate2 ? evaluateModel(c, evalARFF, classCorrectness) : evaluateModel(c, evalARFF);
                                 sw.getMap().put(cName, r);
                                 System.out.println("[Forecast " + finalI + "] Classifier [" + cName + "] for Switch [" + sw.getDpid() + "] Evaluated!");
                             } catch (Exception e){
@@ -228,6 +236,60 @@ public class GenerateModel {
             if(actual.equals(predict)) {
                 ++num;
             }
+        }
+
+        Result r = new Result();
+        r.maxError = maxErr;
+        r._n = dataset.numInstances();
+        r.correct = (double)num / (double)dataset.numInstances() * 100.0D;
+        r.sigma = (double)totErr / (double)dataset.numInstances();
+        r.RMSE = eval.rootMeanSquaredError();
+        r.precision = eval.weightedPrecision();
+        r.recall = eval.weightedRecall();
+        r.coverage = eval.coverageOfTestCasesByPredictedRegions();
+        return r;
+    }
+
+    public static Result evaluateModel(Classifier c, String fileModel, int classToCover) throws Exception {
+        DataSource source = new DataSource(fileModel);
+        Instances dataset = source.getDataSet();
+        dataset.setClassIndex(dataset.numAttributes() - 1);
+        Evaluation eval = new Evaluation(dataset);
+        eval.crossValidateModel(c, dataset, 10, new Random(), new Object[0]);
+        int num = 0;
+        int totErr = 0;
+        int maxErr = 0;
+
+        for(int r = 0; r < dataset.numInstances(); ++r) {
+            double actualClass = dataset.instance(r).classValue();
+            String actual = dataset.classAttribute().value((int) actualClass);
+            Instance newInst = dataset.instance(r);
+            int predictClass = (int) c.classifyInstance(newInst);
+            String predict = dataset.classAttribute().value((int) predictClass);
+
+            int _min = Math.max(0, (int) actualClass - classCorrectness);
+            int _max = (int)actualClass + classCorrectness;
+            if( _min <= predictClass && _max >= predictClass){
+                //No error just increment the counter of correct class predicted
+                ++num;
+            }
+            else {
+                //Error
+                int indexError = predictClass - (int)actualClass;
+                indexError = Math.max( Math.abs(indexError) - classCorrectness, 0 );
+
+                if(indexError > maxErr) {
+                    maxErr = indexError;
+                }
+
+                totErr += indexError;
+                if(actual.equals(predict)) {
+                    ++num;
+                }
+            }
+
+
+
         }
 
         Result r = new Result();
