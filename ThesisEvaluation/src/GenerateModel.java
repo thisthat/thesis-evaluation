@@ -267,8 +267,8 @@ public class GenerateModel {
             int predictClass = (int) c.classifyInstance(newInst);
             String predict = dataset.classAttribute().value((int) predictClass);
 
-            int _min = Math.max(0, (int) actualClass - classCorrectness);
-            int _max = (int)actualClass + classCorrectness;
+            int _min = Math.max(0, (int) actualClass - classToCover);
+            int _max = (int)actualClass + classToCover;
             if( _min <= predictClass && _max >= predictClass){
                 //No error just increment the counter of correct class predicted
                 ++num;
@@ -276,7 +276,7 @@ public class GenerateModel {
             else {
                 //Error
                 int indexError = predictClass - (int)actualClass;
-                indexError = Math.max( Math.abs(indexError) - classCorrectness, 0 );
+                indexError = Math.max( Math.abs(indexError) - classToCover, 0 );
 
                 if(indexError > maxErr) {
                     maxErr = indexError;
