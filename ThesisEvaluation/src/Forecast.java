@@ -59,12 +59,12 @@ public class Forecast {
 
     public void writeFile(){
         HSSFWorkbook workbook = new HSSFWorkbook();
-        HSSFSheet sheet = workbook.createSheet("FirstSheet");
+        HSSFSheet sheet = workbook.createSheet("forecast_" + _id);
         int swCouter = 0;
         int _nRow = 2;
         //Num of value in Results structure
         int _max_val = 8;
-        int _maxCol = 10;
+        int _maxCol = 19;
         int space = 4;
         //DEFAULT STYLE
         HSSFFont font = workbook.createFont();
@@ -92,12 +92,22 @@ public class Forecast {
             swhead.createCell(1).setCellValue(sw.getDpid());
             head.createCell(1).setCellValue("Classifier");
             head.createCell(2).setCellValue("Max Error");
-            head.createCell(3).setCellValue("% Correct");
-            head.createCell(4).setCellValue("Sigma");
-            head.createCell(5).setCellValue("RMSE");
-            head.createCell(6).setCellValue("Precision");
-            head.createCell(7).setCellValue("Recall");
-            head.createCell(8).setCellValue("Coverage (0.95)");
+            head.createCell(3).setCellValue("[MIN]% Correct");
+            head.createCell(4).setCellValue("% Correct");
+            head.createCell(5).setCellValue("[MAX]% Correct");
+            head.createCell(6).setCellValue("[MIN]Sigma");
+            head.createCell(7).setCellValue("Sigma");
+            head.createCell(8).setCellValue("[MAX]Sigma");
+            head.createCell(9).setCellValue("[MIN]RMSE");
+            head.createCell(10).setCellValue("RMSE");
+            head.createCell(11).setCellValue("[MAX]RMSE");
+            head.createCell(12).setCellValue("[MIN]Precision");
+            head.createCell(13).setCellValue("Precision");
+            head.createCell(14).setCellValue("[MAX]Precision");
+            head.createCell(15).setCellValue("[MIN]Recall");
+            head.createCell(16).setCellValue("Recall");
+            head.createCell(17).setCellValue("[MAX]Recall");
+            head.createCell(18).setCellValue("Coverage (0.95)");
             _nRow++;
             int _minRow = _nRow;
             //Body
@@ -106,12 +116,22 @@ public class Forecast {
                 HSSFRow row = sheet.createRow((short)(_nRow));
                 row.createCell(1).setCellValue(cName);
                 row.createCell(2).setCellValue(r.maxError);
-                row.createCell(3).setCellValue(r.correct);
-                row.createCell(4).setCellValue(r.sigma);
-                row.createCell(5).setCellValue(r.RMSE);
-                row.createCell(6).setCellValue(r.precision);
-                row.createCell(7).setCellValue(r.recall);
-                row.createCell(8).setCellValue(r.coverage);
+                row.createCell(3).setCellValue(r.correct - r.correctCoef);
+                row.createCell(4).setCellValue(r.correct);
+                row.createCell(5).setCellValue(r.correct + r.correctCoef);
+                row.createCell(6).setCellValue(r.sigma - r.sigmaCoef);
+                row.createCell(7).setCellValue(r.sigma);
+                row.createCell(8).setCellValue(r.sigma + r.sigmaCoef);
+                row.createCell(9).setCellValue(r.RMSE - r.RMSECoef);
+                row.createCell(10).setCellValue(r.RMSE);
+                row.createCell(11).setCellValue(r.RMSE + r.RMSECoef);
+                row.createCell(12).setCellValue(r.precision - r.precisionCoef);
+                row.createCell(13).setCellValue(r.precision);
+                row.createCell(14).setCellValue(r.precision + r.precisionCoef);
+                row.createCell(15).setCellValue(r.recall - r.recallCoef);
+                row.createCell(16).setCellValue(r.recall);
+                row.createCell(17).setCellValue(r.recall + r.recallCoef);
+                row.createCell(18).setCellValue(r.coverage);
                 _nRow++;
             }
             int _maxRow = _nRow;
@@ -156,11 +176,8 @@ public class Forecast {
             }
 
         }
-
-
-
         try {
-            FileOutputStream fileOut = new FileOutputStream("forecast_"+ this._id + ".xls");
+            FileOutputStream fileOut = new FileOutputStream("forecast_" + _id + ".xls");
             workbook.write(fileOut);
             fileOut.close();
         } catch (Exception e) {

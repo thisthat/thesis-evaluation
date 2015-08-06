@@ -98,9 +98,9 @@ for post in db.DataTime.find({ "test" : day },{'_id':0}).sort("_time"):
 
 	#print("Bandwidth: {0}" . format(byte) )
 	currentTime = (time-prevTime)
-	currentByte = (byte-prevByte) / currentTime
+	currentByte = ((byte-prevByte) / 8) / currentTime
 	if (byte-prevByte) < 0:
-		currentByte = byte / currentTime
+		currentByte = (byte / 8) / currentTime
 	tmp.append({"bandwidth": currentByte, "sec": time})
 
 	prevByte = byte

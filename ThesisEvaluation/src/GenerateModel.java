@@ -1,8 +1,11 @@
 import java.io.File;
+import java.io.FileOutputStream;
 import java.util.List;
 import java.util.Random;
 import java.util.Vector;
 
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import sun.awt.windows.ThemeReader;
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
@@ -87,6 +90,7 @@ public class GenerateModel {
                     break;
                 case  "-e":
                     evaluate = true;
+                    break;
                 case  "-e2":
                     evaluate = evaluate2 = true;
                     if(i < args.length -1){
@@ -94,6 +98,16 @@ public class GenerateModel {
                     }
             }
         }
+        if(generate) {
+            System.out.println("[OPT] Generate activated");
+        }
+        if(evaluate) {
+            System.out.println("[OPT] Normal Evaluation");
+        }
+        if(evaluate2) {
+            System.out.println("[OPT] Evaluation with number " + classCorrectness);
+        }
+
 
         initFolder = args[0];
         if(!initFolder.endsWith("\\")) {
@@ -200,6 +214,7 @@ public class GenerateModel {
             });
             th[i].start();
         }
+
         for(int i = 0; i < howManyForecast; ++i) {
             try {
                 th[i].join();
@@ -208,6 +223,7 @@ public class GenerateModel {
             }
             forecasts[i].writeFile();
         }
+
     }
 
     public static Result evaluateModel(Classifier c, String fileModel) throws Exception {
@@ -239,13 +255,28 @@ public class GenerateModel {
         }
 
         Result r = new Result();
+        double coef;
+        double tmp;
         r.maxError = maxErr;
         r._n = dataset.numInstances();
         r.correct = (double)num / (double)dataset.numInstances() * 100.0D;
+        tmp = (double)num / (double)dataset.numInstances();
+        coef = 1.96 * Math.sqrt(tmp * (1-tmp) / r._n) * 100;
+        r.correctCoef = coef;
         r.sigma = (double)totErr / (double)dataset.numInstances();
+        tmp = (r.sigma / 19f);
+        coef = 1.96 * Math.sqrt(tmp * (1-tmp) / 19f) * 19;
+        //System.out.println(coef);
+        r.sigmaCoef = coef;
         r.RMSE = eval.rootMeanSquaredError();
+        coef =  1.96 * Math.sqrt( r.RMSE * (1- r.RMSE) / r._n  );
+        r.RMSECoef = coef;
         r.precision = eval.weightedPrecision();
+        coef =  1.96 * Math.sqrt( r.precision * (1- r.precision) / r._n  );
+        r.precisionCoef = coef;
         r.recall = eval.weightedRecall();
+        coef =  1.96 * Math.sqrt( r.recall * (1- r.recall) / r._n  );
+        r.recallCoef = coef;
         r.coverage = eval.coverageOfTestCasesByPredictedRegions();
         return r;
     }
@@ -283,9 +314,6 @@ public class GenerateModel {
                 }
 
                 totErr += indexError;
-                if(actual.equals(predict)) {
-                    ++num;
-                }
             }
 
 
@@ -293,14 +321,29 @@ public class GenerateModel {
         }
 
         Result r = new Result();
+        double coef;
+        double tmp;
         r.maxError = maxErr;
         r._n = dataset.numInstances();
         r.correct = (double)num / (double)dataset.numInstances() * 100.0D;
+        tmp = (double)num / (double)dataset.numInstances();
+        coef = 1.96 * Math.sqrt(tmp * (1-tmp) / r._n) * 100;
+        r.correctCoef = coef;
         r.sigma = (double)totErr / (double)dataset.numInstances();
+        tmp = (r.sigma / 19f);
+        coef = 1.96 * Math.sqrt(tmp * (1-tmp) / 19f) * 19;
+        r.sigmaCoef = coef;
         r.RMSE = eval.rootMeanSquaredError();
+        coef =  1.96 * Math.sqrt( r.RMSE * (1- r.RMSE) / r._n  );
+        r.RMSECoef = coef;
         r.precision = eval.weightedPrecision();
+        coef =  1.96 * Math.sqrt( r.precision * (1- r.precision) / r._n  );
+        r.precisionCoef = coef;
         r.recall = eval.weightedRecall();
+        coef =  1.96 * Math.sqrt( r.recall * (1- r.recall) / r._n  );
+        r.recallCoef = coef;
         r.coverage = eval.coverageOfTestCasesByPredictedRegions();
         return r;
     }
+
 }

@@ -5,11 +5,16 @@ public class Result {
     public String name;
     public int _n;
     public double correct;
+    public double correctCoef;
     public int maxError;
     public double RMSE;
+    public double RMSECoef;
     public double sigma;
+    public double sigmaCoef;
     public double precision;
+    public double precisionCoef;
     public double recall;
+    public double recallCoef;
     public double coverage;
 
     public String getName() {
