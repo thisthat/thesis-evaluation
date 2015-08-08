@@ -1,2 +1,2 @@
-php -f export_models.php learn\learn_500d_8
-php -f copy_arff_to_model.php eval\random10\random10_8 onlyModel
+php -f export_models.php learn\learn_500d
+php -f copy_arff_to_model.php eval\random10\500d onlyModel

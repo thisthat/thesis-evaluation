@@ -133,24 +133,31 @@ public class GenerateModel {
         //Add Classifiers
         if(nb) {
             classifiers.add(new NaiveBayes());
+            System.out.println("[OPT] Naive Bayes activated");
         }
         if(smo) {
             classifiers.add(new SMO());
+            System.out.println("[OPT] SMO activated");
         }
         if(zero) {
             classifiers.add(new ZeroR());
+            System.out.println("[OPT] ZeroR activated");
         }
         if(bn) {
             classifiers.add(new BayesNet());
+            System.out.println("[OPT] Bayes Net activated");
         }
         if(nn) {
             classifiers.add(new MultilayerPerceptron());
+            System.out.println("[OPT] MPL activated");
         }
         if(j48) {
             classifiers.add(new J48());
+            System.out.println("[OPT] J48 activated");
         }
         if(kstar) {
             classifiers.add(new KStar());
+            System.out.println("[OPT] KStar activated");
         }
 
         //Create Model
@@ -202,6 +209,7 @@ public class GenerateModel {
                                 Classifier c = (Classifier) SerializationHelper.read(classifier);
                                 String cName = c.getClass().toString();
                                 cName = cName.substring(cName.lastIndexOf('.') + 1);
+                                System.out.println("[Forecast " + finalI + "] Classifier [" + cName + "] for Switch [" + sw.getDpid() + "] to be evaluated!");
                                 r = evaluate2 ? evaluateModel(c, evalARFF, classCorrectness) : evaluateModel(c, evalARFF);
                                 sw.getMap().put(cName, r);
                                 System.out.println("[Forecast " + finalI + "] Classifier [" + cName + "] for Switch [" + sw.getDpid() + "] Evaluated!");
