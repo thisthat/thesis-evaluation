@@ -22,16 +22,16 @@ for %%i in %SW_LIST% do (
 	for %%j in %FORECAST% do (
 echo %%i -- %%j
 
-python createDataset.py -class_size:500 -skip:2 -skip_end:1 -day:random20_1 -switch:%%i -forecast:%%j -derivate -win_size:8
-python createDataset.py -class_size:500 -skip:2 -skip_end:1 -day:random20_2 -switch:%%i -forecast:%%j -derivate -win_size:8
-python createDataset.py -class_size:500 -skip:2 -skip_end:1 -day:random20_3 -switch:%%i -forecast:%%j -derivate -win_size:8
-python createDataset.py -class_size:500 -skip:2 -skip_end:1 -day:random20_4 -switch:%%i -forecast:%%j -derivate -win_size:8
-python createDataset.py -class_size:500 -skip:2 -skip_end:1 -day:random20_5 -switch:%%i -forecast:%%j -derivate -win_size:8
-python createDataset.py -class_size:500 -skip:2 -skip_end:1 -day:random20_6 -switch:%%i -forecast:%%j -derivate -win_size:8
-python createDataset.py -class_size:500 -skip:2 -skip_end:1 -day:random20_7 -switch:%%i -forecast:%%j -derivate -win_size:8
-python createDataset.py -class_size:500 -skip:2 -skip_end:1 -day:random20_8 -switch:%%i -forecast:%%j -derivate -win_size:8
-python createDataset.py -class_size:500 -skip:2 -skip_end:1 -day:random20_9 -switch:%%i -forecast:%%j -derivate -win_size:8
-python createDataset.py -class_size:500 -skip:2 -skip_end:1 -day:random20_10 -switch:%%i -forecast:%%j -derivate -win_size:8
+python createDataset.py -class_size:500 -skip:2 -skip_end:1 -day:p2p_rnd20_1 -switch:%%i -forecast:%%j -derivate 
+python createDataset.py -class_size:500 -skip:2 -skip_end:1 -day:p2p_rnd20_2 -switch:%%i -forecast:%%j -derivate 
+python createDataset.py -class_size:500 -skip:3 -skip_end:1 -day:p2p_rnd20_3 -switch:%%i -forecast:%%j -derivate 
+python createDataset.py -class_size:500 -skip:2 -skip_end:1 -day:p2p_rnd20_4 -switch:%%i -forecast:%%j -derivate 
+python createDataset.py -class_size:500 -skip:2 -skip_end:1 -day:p2p_rnd20_5 -switch:%%i -forecast:%%j -derivate
+python createDataset.py -class_size:500 -skip:3 -skip_end:1 -day:p2p_rnd20_6 -switch:%%i -forecast:%%j -derivate 
+python createDataset.py -class_size:500 -skip:3 -skip_end:1 -day:p2p_rnd20_7 -switch:%%i -forecast:%%j -derivate
+python createDataset.py -class_size:500 -skip:3 -skip_end:1 -day:p2p_rnd20_8 -switch:%%i -forecast:%%j -derivate 
+python createDataset.py -class_size:500 -skip:3 -skip_end:1 -day:p2p_rnd20_9 -switch:%%i -forecast:%%j -derivate 
+python createDataset.py -class_size:500 -skip:3 -skip_end:1 -day:p2p_rnd20_10 -switch:%%i -forecast:%%j -derivate 
 
 
 php -f merge.php forecast_%%j/%%i
