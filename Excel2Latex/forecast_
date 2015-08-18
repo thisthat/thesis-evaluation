@@ -1,0 +1,285 @@
+
+\begin{table}[h!]
+\centering
+\resizebox{1\textwidth}{!}{%
+\begin{tabular}{c|ccccccccccccccccc}
+Classifier&	Max Error&	\% Correct&	Sigma&	RMSE&	Precision&	Recall&	Coverage (0.95)	\\
+
+&       &       &       &       &       &       &       &       &       &       &       &       &       &       &       &       &  \\
+MultilayerPerceptron&	19&	60.79&	3.957&	0.177&	0.408&	0.6&	83.175	\\
+
+BayesNet&	19&	58.083&	4.179&	0.176&	0.405&	0.593&	86.979	\\
+
+SMO&	19&	60.863&	3.833&	0.212&	0.407&	0.612&	94.952	\\
+
+\end{tabular}%
+}
+\caption{00-00-00-00-00-00-03-01}
+\label{tab:c-s_table_random5_switch_00-00-00-00-00-00-03-01_forecast1}%
+\end{table}%
+
+\begin{table}[h!]
+\centering
+\resizebox{1\textwidth}{!}{%
+\begin{tabular}{c|ccccccccccccccccc}
+Classifier&	Max Error&	\% Correct&	Sigma&	RMSE&	Precision&	Recall&	Coverage (0.95)	\\
+
+&       &       &       &       &       &       &       &       &       &       &       &       &       &       &       &       &  \\
+MultilayerPerceptron&	19&	39.137&	6.252&	0.2&	0.274&	0.388&	85.808	\\
+
+BayesNet&	19&	35.26&	5.816&	0.202&	0.249&	0.375&	85.369	\\
+
+SMO&	19&	40.454&	5.865&	0.212&	0.242&	0.394&	96.05	\\
+
+\end{tabular}%
+}
+\caption{00-00-00-00-00-00-03-02}
+\label{tab:c-s_table_random5_switch_00-00-00-00-00-00-03-02_forecast1}%
+\end{table}%
+
+\begin{table}[h!]
+\centering
+\resizebox{1\textwidth}{!}{%
+\begin{tabular}{c|ccccccccccccccccc}
+Classifier&	Max Error&	\% Correct&	Sigma&	RMSE&	Precision&	Recall&	Coverage (0.95)	\\
+
+&       &       &       &       &       &       &       &       &       &       &       &       &       &       &       &       &  \\
+MultilayerPerceptron&	19&	51.573&	4.772&	0.189&	0.36&	0.511&	86.394	\\
+
+BayesNet&	19&	51.426&	4.587&	0.189&	0.328&	0.51&	85.15	\\
+
+SMO&	19&	51.865&	4.776&	0.212&	0.307&	0.526&	96.781	\\
+
+\end{tabular}%
+}
+\caption{00-00-00-00-00-00-03-03}
+\label{tab:c-s_table_random5_switch_00-00-00-00-00-00-03-03_forecast1}%
+\end{table}%
+
+\begin{table}[h!]
+\centering
+\resizebox{1\textwidth}{!}{%
+\begin{tabular}{c|ccccccccccccccccc}
+Classifier&	Max Error&	\% Correct&	Sigma&	RMSE&	Precision&	Recall&	Coverage (0.95)	\\
+
+&       &       &       &       &       &       &       &       &       &       &       &       &       &       &       &       &  \\
+MultilayerPerceptron&	19&	55.596&	4.417&	0.201&	0.402&	0.466&	67.74	\\
+
+BayesNet&	19&	53.475&	4.396&	0.182&	0.405&	0.546&	84.931	\\
+
+SMO&	19&	55.889&	4.431&	0.211&	0.36&	0.553&	96.928	\\
+
+\end{tabular}%
+}
+\caption{00-00-00-00-00-00-03-04}
+\label{tab:c-s_table_random5_switch_00-00-00-00-00-00-03-04_forecast1}%
+\end{table}%
+
+\begin{table}[h!]
+\centering
+\resizebox{1\textwidth}{!}{%
+\begin{tabular}{c|ccccccccccccccccc}
+Classifier&	Max Error&	\% Correct&	Sigma&	RMSE&	Precision&	Recall&	Coverage (0.95)	\\
+
+&       &       &       &       &       &       &       &       &       &       &       &       &       &       &       &       &  \\
+MultilayerPerceptron&	19&	30.651&	6.623&	0.23&	0.227&	0.265&	57.644	\\
+
+BayesNet&	19&	32.26&	6.11&	0.201&	0.235&	0.308&	92.246	\\
+
+SMO&	19&	33.504&	6.68&	0.212&	0.206&	0.316&	98.317	\\
+
+\end{tabular}%
+}
+\caption{00-00-00-00-00-00-03-05}
+\label{tab:c-s_table_random5_switch_00-00-00-00-00-00-03-05_forecast1}%
+\end{table}%
+
+\begin{table}[h!]
+\centering
+\resizebox{1\textwidth}{!}{%
+\begin{tabular}{c|ccccccccccccccccc}
+Classifier&	Max Error&	\% Correct&	Sigma&	RMSE&	Precision&	Recall&	Coverage (0.95)	\\
+
+&       &       &       &       &       &       &       &       &       &       &       &       &       &       &       &       &  \\
+MultilayerPerceptron&	19&	36.284&	6.607&	0.225&	0.234&	0.271&	61.96	\\
+
+BayesNet&	19&	34.382&	6.092&	0.2&	0.227&	0.32&	92.099	\\
+
+SMO&	19&	36.503&	6.313&	0.212&	0.217&	0.346&	98.464	\\
+
+\end{tabular}%
+}
+\caption{00-00-00-00-00-00-03-06}
+\label{tab:c-s_table_random5_switch_00-00-00-00-00-00-03-06_forecast1}%
+\end{table}%
+
+\begin{table}[h!]
+\centering
+\resizebox{1\textwidth}{!}{%
+\begin{tabular}{c|ccccccccccccccccc}
+Classifier&	Max Error&	\% Correct&	Sigma&	RMSE&	Precision&	Recall&	Coverage (0.95)	\\
+
+&       &       &       &       &       &       &       &       &       &       &       &       &       &       &       &       &  \\
+MultilayerPerceptron&	19&	35.772&	6.713&	0.227&	0.244&	0.285&	59.693	\\
+
+BayesNet&	19&	32.992&	6.543&	0.199&	0.243&	0.318&	92.246	\\
+
+SMO&	19&	36.064&	6.696&	0.212&	0.178&	0.336&	98.244	\\
+
+\end{tabular}%
+}
+\caption{00-00-00-00-00-00-03-07}
+\label{tab:c-s_table_random5_switch_00-00-00-00-00-00-03-07_forecast1}%
+\end{table}%
+
+\begin{table}[h!]
+\centering
+\resizebox{1\textwidth}{!}{%
+\begin{tabular}{c|ccccccccccccccccc}
+Classifier&	Max Error&	\% Correct&	Sigma&	RMSE&	Precision&	Recall&	Coverage (0.95)	\\
+
+&       &       &       &       &       &       &       &       &       &       &       &       &       &       &       &       &  \\
+MultilayerPerceptron&	19&	48.793&	4.966&	0.191&	0.303&	0.484&	88.661	\\
+
+BayesNet&	19&	47.696&	4.797&	0.194&	0.322&	0.472&	84.784	\\
+
+SMO&	19&	48.5&	4.751&	0.212&	0.313&	0.486&	98.391	\\
+
+\end{tabular}%
+}
+\caption{00-00-00-00-00-00-03-08}
+\label{tab:c-s_table_random5_switch_00-00-00-00-00-00-03-08_forecast1}%
+\end{table}%
+
+\begin{table}[h!]
+\centering
+\resizebox{1\textwidth}{!}{%
+\begin{tabular}{c|ccccccccccccccccc}
+Classifier&	Max Error&	\% Correct&	Sigma&	RMSE&	Precision&	Recall&	Coverage (0.95)	\\
+
+&       &       &       &       &       &       &       &       &       &       &       &       &       &       &       &       &  \\
+MultilayerPerceptron&	19&	35.991&	6.629&	0.229&	0.268&	0.304&	56.986	\\
+
+BayesNet&	19&	34.821&	6.372&	0.198&	0.251&	0.352&	91.661	\\
+
+SMO&	19&	36.723&	6.381&	0.212&	0.204&	0.371&	97.366	\\
+
+\end{tabular}%
+}
+\caption{00-00-00-00-00-00-03-09}
+\label{tab:c-s_table_random5_switch_00-00-00-00-00-00-03-09_forecast1}%
+\end{table}%
+
+\begin{table}[h!]
+\centering
+\resizebox{1\textwidth}{!}{%
+\begin{tabular}{c|ccccccccccccccccc}
+Classifier&	Max Error&	\% Correct&	Sigma&	RMSE&	Precision&	Recall&	Coverage (0.95)	\\
+
+&       &       &       &       &       &       &       &       &       &       &       &       &       &       &       &       &  \\
+MultilayerPerceptron&	19&	34.016&	5.855&	0.227&	0.233&	0.28&	58.376	\\
+
+BayesNet&	19&	34.162&	6.175&	0.199&	0.217&	0.345&	92.465	\\
+
+SMO&	19&	35.845&	6.426&	0.212&	0.213&	0.343&	97.001	\\
+
+\end{tabular}%
+}
+\caption{00-00-00-00-00-00-03-0a}
+\label{tab:c-s_table_random5_switch_00-00-00-00-00-00-03-0a_forecast1}%
+\end{table}%
+
+\begin{table}[h!]
+\centering
+\resizebox{1\textwidth}{!}{%
+\begin{tabular}{c|ccccccccccccccccc}
+Classifier&	Max Error&	\% Correct&	Sigma&	RMSE&	Precision&	Recall&	Coverage (0.95)	\\
+
+&       &       &       &       &       &       &       &       &       &       &       &       &       &       &       &       &  \\
+MultilayerPerceptron&	19&	29.554&	5.173&	0.223&	0.258&	0.301&	62.911	\\
+
+BayesNet&	19&	31.748&	5.612&	0.2&	0.247&	0.326&	91.441	\\
+
+SMO&	19&	35.991&	5.948&	0.212&	0.221&	0.348&	98.317	\\
+
+\end{tabular}%
+}
+\caption{00-00-00-00-00-00-03-0b}
+\label{tab:c-s_table_random5_switch_00-00-00-00-00-00-03-0b_forecast1}%
+\end{table}%
+
+\begin{table}[h!]
+\centering
+\resizebox{1\textwidth}{!}{%
+\begin{tabular}{c|ccccccccccccccccc}
+Classifier&	Max Error&	\% Correct&	Sigma&	RMSE&	Precision&	Recall&	Coverage (0.95)	\\
+
+&       &       &       &       &       &       &       &       &       &       &       &       &       &       &       &       &  \\
+MultilayerPerceptron&	19&	28.164&	6.633&	0.205&	0.256&	0.334&	85.15	\\
+
+BayesNet&	19&	33.065&	6.469&	0.204&	0.261&	0.312&	85.296	\\
+
+SMO&	19&	34.089&	6.919&	0.212&	0.208&	0.346&	97.879	\\
+
+\end{tabular}%
+}
+\caption{00-00-00-00-00-00-03-0c}
+\label{tab:c-s_table_random5_switch_00-00-00-00-00-00-03-0c_forecast1}%
+\end{table}%
+
+\begin{table}[h!]
+\centering
+\resizebox{1\textwidth}{!}{%
+\begin{tabular}{c|ccccccccccccccccc}
+Classifier&	Max Error&	\% Correct&	Sigma&	RMSE&	Precision&	Recall&	Coverage (0.95)	\\
+
+&       &       &       &       &       &       &       &       &       &       &       &       &       &       &       &       &  \\
+MultilayerPerceptron&	19&	33.211&	6.497&	0.2&	0.239&	0.337&	90.636	\\
+
+BayesNet&	19&	33.577&	6.067&	0.203&	0.249&	0.303&	88.076	\\
+
+SMO&	19&	35.333&	6.668&	0.212&	0.223&	0.341&	98.244	\\
+
+\end{tabular}%
+}
+\caption{00-00-00-00-00-00-03-0d}
+\label{tab:c-s_table_random5_switch_00-00-00-00-00-00-03-0d_forecast1}%
+\end{table}%
+
+\begin{table}[h!]
+\centering
+\resizebox{1\textwidth}{!}{%
+\begin{tabular}{c|ccccccccccccccccc}
+Classifier&	Max Error&	\% Correct&	Sigma&	RMSE&	Precision&	Recall&	Coverage (0.95)	\\
+
+&       &       &       &       &       &       &       &       &       &       &       &       &       &       &       &       &  \\
+MultilayerPerceptron&	19&	34.382&	6.262&	0.226&	0.258&	0.298&	59.473	\\
+
+BayesNet&	19&	32.772&	6.489&	0.198&	0.27&	0.345&	91.514	\\
+
+SMO&	19&	37.308&	6.331&	0.211&	0.22&	0.347&	98.464	\\
+
+\end{tabular}%
+}
+\caption{00-00-00-00-00-00-03-0e}
+\label{tab:c-s_table_random5_switch_00-00-00-00-00-00-03-0e_forecast1}%
+\end{table}%
+
+\begin{table}[h!]
+\centering
+\resizebox{1\textwidth}{!}{%
+\begin{tabular}{c|ccccccccccccccccc}
+Classifier&	Max Error&	\% Correct&	Sigma&	RMSE&	Precision&	Recall&	Coverage (0.95)	\\
+
+&       &       &       &       &       &       &       &       &       &       &       &       &       &       &       &       &  \\
+MultilayerPerceptron&	19&	35.845&	6.813&	0.201&	0.233&	0.334&	90.051	\\
+
+BayesNet&	19&	33.577&	6.202&	0.201&	0.255&	0.352&	90.563	\\
+
+SMO&	19&	35.04&	6.556&	0.212&	0.208&	0.339&	98.683	\\
+
+\end{tabular}%
+}
+\caption{00-00-00-00-00-00-03-0f}
+\label{tab:c-s_table_random5_switch_00-00-00-00-00-00-03-0f_forecast1}%
+\end{table}%
